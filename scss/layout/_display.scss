@@ -1,0 +1,29 @@
+.display {
+  // height: 25vmin;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: center;
+  // align-items: flex-end;
+  // margin-right: 10vw;
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  // justify-self: end;
+  // align-self: center;
+  // align-items: center;
+  // text-align: right;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-end;
+
+  color: var(--color-text);
+
+  &__operations {
+    font-size: 6vmin;
+  }
+  &__result {
+    font-size: 16vmin;
+    font-weight: 800;
+  }
+}

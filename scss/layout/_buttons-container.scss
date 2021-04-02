@@ -1,0 +1,19 @@
+.btns-container {
+  // align-self: center;
+  place-self: center;
+
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+
+  display: grid;
+  // margin-top: auto;
+  // margin: 2rem auto;
+  // height: 50vh;
+  // height: 70vh;
+  grid-gap: 0.2rem;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  // padding-block: 10rem;
+  // margin-bottom: 1rem;
+  // overflow: hidden;
+}

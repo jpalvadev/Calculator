@@ -1,0 +1,17 @@
+.container {
+  // height: 100%;
+  // display: flex;
+  // margin: 0 auto;
+  // border: 1px solid red;
+  // flex-direction: column;
+  // justify-content: space-evenly;
+  // grid-gap: 1rem;
+  // align-items: flex-start;
+  // justify-items: center;
+  // align-content: center;
+
+  display: grid;
+  grid-template-columns: 1fr min-content 1fr;
+  grid-template-rows: 25vh 65vh;
+  margin-top: 5vh;
+}
