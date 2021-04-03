@@ -40,6 +40,7 @@ button {
 
 .btns-container__btn.teal {
   color: var(--color-accent);
+  background-color: var(--color-accent-transparent);
   font-size: 10vmin;
 }
 
@@ -81,12 +82,12 @@ button {
   color: var(--color-text);
 }
 
-.display__operations {
+.display__history {
   font-size: 6vmin;
 }
 
-.display__result {
-  font-size: 16vmin;
+.display__value {
+  font-size: 12vmin;
   font-weight: 800;
 }
 /*# sourceMappingURL=main.css.map */

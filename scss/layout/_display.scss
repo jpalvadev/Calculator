@@ -18,12 +18,14 @@
   align-items: flex-end;
 
   color: var(--color-text);
+  // margin-bottom: 5rem;
 
-  &__operations {
+  &__history {
     font-size: 6vmin;
   }
-  &__result {
-    font-size: 16vmin;
+  &__value {
+    font-size: 12vmin;
+
     font-weight: 800;
   }
 }

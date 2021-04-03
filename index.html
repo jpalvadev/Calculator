@@ -16,34 +16,38 @@
   <body>
     <div class="container">
       <div class="display">
-        <p class="display__operations">34 + 12 * 44</p>
-        <p class="display__result">2024</p>
+        <p class="display__history">34 + 12 * 44</p>
+        <p class="display__value">0</p>
       </div>
       <div class="btns-container">
-        <button class="btns-container__btn teal">C</button>
-        <button class="btns-container__btn teal">Mic</button>
-        <button class="btns-container__btn teal" data-key="68">
-          <img src="images/dl-mode.svg" alt="Dark light Mode icon" />
+        <button class="btns-container__btn clear teal">C</button>
+        <button class="btns-container__btn mic teal">Mic</button>
+        <button class="btns-container__btn dark-mode teal" data-key="68">
+          Col
+          <!-- <img src="images/dl-mode.svg" alt="Dark light Mode icon" /> -->
         </button>
         <!-- <button class="btns-container__btn teal">÷</button> -->
-        <button class="btns-container__btn teal">/</button>
-        <button class="btns-container__btn">7</button>
-        <button class="btns-container__btn">8</button>
-        <button class="btns-container__btn">9</button>
-        <button class="btns-container__btn teal">x</button>
-        <button class="btns-container__btn">4</button>
-        <button class="btns-container__btn">5</button>
-        <button class="btns-container__btn">6</button>
-        <button class="btns-container__btn teal">-</button>
-        <button class="btns-container__btn">1</button>
-        <button class="btns-container__btn">2</button>
-        <button class="btns-container__btn">3</button>
+        <button class="btns-container__btn operator teal">/</button>
 
-        <button class="btns-container__btn teal">+</button>
-        <button class="btns-container__btn">Bck</button>
-        <button class="btns-container__btn">0</button>
-        <button class="btns-container__btn">.</button>
-        <button class="btns-container__btn teal equal">=</button>
+        <button class="btns-container__btn number">7</button>
+        <button class="btns-container__btn number">8</button>
+        <button class="btns-container__btn number">9</button>
+        <button class="btns-container__btn operator teal">x</button>
+
+        <button class="btns-container__btn number">4</button>
+        <button class="btns-container__btn number">5</button>
+        <button class="btns-container__btn number">6</button>
+        <button class="btns-container__btn operator teal">-</button>
+
+        <button class="btns-container__btn number">1</button>
+        <button class="btns-container__btn number">2</button>
+        <button class="btns-container__btn number">3</button>
+        <button class="btns-container__btn operator teal">+</button>
+
+        <button class="btns-container__btn back">Bck</button>
+        <button class="btns-container__btn number">0</button>
+        <button class="btns-container__btn decimal">.</button>
+        <button class="btns-container__btn operator teal equal">=</button>
       </div>
     </div>
   </body>
