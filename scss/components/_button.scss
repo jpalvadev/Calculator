@@ -1,4 +1,6 @@
 .btns-container__btn {
+  // position: relative;
+  // z-index: 66;
   // border: 1px solid #f6f6f6;
   // aspect-ratio: 1; // square buttons
   // max-height: 100%;
@@ -8,10 +10,12 @@
   // max-width: 13vh;
   font-size: 7vmin;
   color: var(--color-text);
+  // visibility: hidden;
+  background-color: var(--color-back);
 
   &.teal {
     color: var(--color-accent);
-    background-color: var(--color-accent-transparent);
+    // background-color: var(--color-accent-transparent);
     font-size: 10vmin;
   }
 

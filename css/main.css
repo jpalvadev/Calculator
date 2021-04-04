@@ -1,6 +1,6 @@
 :root {
-  --color-text: #252525;
-  --color-back: #ffffff;
+  --color-text: #ffffff;
+  --color-back: #252525;
   --color-accent: #4fe4c4;
 }
 
@@ -36,11 +36,11 @@ button {
   max-height: 13vh;
   font-size: 7vmin;
   color: var(--color-text);
+  background-color: var(--color-back);
 }
 
 .btns-container__btn.teal {
   color: var(--color-accent);
-  background-color: var(--color-accent-transparent);
   font-size: 10vmin;
 }
 
@@ -63,13 +63,26 @@ button {
 }
 
 .btns-container {
+  position: relative;
   place-self: center;
   grid-column: 2 / 3;
   grid-row: 2 / 3;
   display: grid;
   grid-gap: 0.2rem;
+  padding: 0.2rem;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(5, 1fr);
+  overflow: hidden;
+}
+
+.btns-container__light {
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 50%);
+  position: absolute;
+  width: 45vmin;
+  height: 45vmin;
+  z-index: -1;
+  border-radius: 50%;
+  transform: translate3d(-50%, -50%, 0);
 }
 
 .display {
@@ -82,7 +95,7 @@ button {
   color: var(--color-text);
 }
 
-.display__history {
+.display__operation {
   font-size: 6vmin;
 }
 

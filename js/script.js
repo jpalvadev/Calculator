@@ -1,34 +1,19 @@
-// Math.pow(n, 1/root);
-
-const regex = new RegExp('([0-9]+)|([^0-9]+)', 'g');
-const isOperatorRegex = new RegExp('[^0-9]');
-const isNumberRegex = new RegExp('[0-9]');
-
-// let pep = 'djkdhs+';
-// console.log(pep[pep.length - 1]);
-// let la = 1;
-// console.log(la);
-// console.log(isOperatorRegex.test(la));
-
 let textColor = getComputedStyle(document.body).getPropertyValue(
   '--color-text'
 );
 let bgColor = getComputedStyle(document.body).getPropertyValue('--color-back');
 
 const btnsContainer = document.querySelector('.btns-container');
-const displayHistory = document.querySelector('.display__history');
+const displayOperation = document.querySelector('.display__operation');
 const displayValue = document.querySelector('.display__value');
 
 const calculator = {
-  value: '',
-  history: '',
-  array: [],
+  displayValue: 0,
   firstOperand: '',
-  hasFirstOperand: false,
+  hasFirstPart: false,
   operator: '',
-  hasOperator: false,
   secondOperand: '',
-  hasSecondOperand: false,
+  calculationDone: false,
 };
 
 const changeColorMode = () => {
@@ -37,88 +22,120 @@ const changeColorMode = () => {
   document.documentElement.style.setProperty('--color-back', bgColor);
 };
 
-const changeStringToArray = () => {
-  calculator.array = calculator.value.match(regex);
+handleOperation = () => {
+  switch (calculator.operator) {
+    case '+':
+      return calculator.firstOperand + calculator.secondOperand;
+    case '-':
+      return calculator.firstOperand - calculator.secondOperand;
+    case 'x':
+      return calculator.firstOperand * calculator.secondOperand;
+    case '/':
+      return calculator.firstOperand / calculator.secondOperand;
+    case '^':
+      return calculator.firstOperand ** calculator.secondOperand;
+    case '√':
+      return Math.pow(calculator.firstOperand, 1 / calculator.secondOperand);
+  }
 };
 
-const checkLastInputIsNumber = () => {
-  const lastInput = calculator.value[calculator.value.length - 1];
-  return isNumberRegex.test(lastInput);
+const handleEqualInput = () => {
+  if (!calculator.hasFirstPart) return;
+
+  calculator.secondOperand = parseFloat(calculator.displayValue);
+  if (!calculator.secondOperand) return;
+
+  calculator.displayValue = handleOperation();
+  const operandOne = Number(calculator.firstOperand).toLocaleString('en-US');
+  const OperandTwo = Number(calculator.secondOperand).toLocaleString('en-US');
+  const result = Number(calculator.displayValue).toLocaleString('en-US');
+
+  displayOperation.textContent = `${operandOne} ${calculator.operator} ${OperandTwo} = ${result}`;
+
+  updateDisplayValue();
+  calculator.hasFirstPart = false;
+  calculator.secondOperand = '';
+  calculator.operator = '';
 };
 
-const checkValidDecimals = () => {
-  // if (!checkLastInputIsNumber) return;
-  changeStringToArray();
-  console.log(calculator.array[-1].includes('.'));
+const handleOperatorInput = (operator) => {
+  if (calculator.operator) {
+    calculator.operator = operator;
+    displayOperation.textContent =
+      displayOperation.textContent.slice(0, -1) + operator;
+  }
 
-  return calculator.array[-1].includes('.');
+  if (calculator.displayValue.length === 0) return;
+
+  calculator.calculationDone = false;
+
+  if (calculator.hasFirstPart) {
+    handleEqualInput();
+  }
+  calculator.operator = operator;
+  calculator.hasFirstPart = true;
+  calculator.firstOperand = parseFloat(calculator.displayValue);
+  const operandOne = Number(calculator.firstOperand).toLocaleString('en-US');
+  displayOperation.textContent = `${operandOne} ${calculator.operator}`;
+  calculator.displayValue = '';
 };
 
-// const checkLastInputIsOperator = () => {
-//   const lastInput = calculator.value[calculator.value.length - 1];
-//   if (isOperatorRegex.test(lastInput)) {
-//     calculator.value = calculator.value.substring(
-//       0,
-//       calculator.value.length - 1
-//     );
-//   }
-//   updateDisplayValue();
-// };
-
-const checkLastInputIsOperator = () => {
-  const lastInput = calculator.value[calculator.value.length - 1];
-  return isOperatorRegex.test(lastInput);
+const handleNumberInput = (number) => {
+  if (calculator.calculationDone) ClearAll();
+  calculator.displayValue += number;
+  updateDisplayValue(number);
 };
 
 const handleDecimalInput = () => {
-  if (checkLastInputIsOperator) {
-    console.log('ok');
+  if (calculator.calculationDone) ClearAll();
+  if (displayValue.textContent.includes('.')) return;
+  if (calculator.displayValue === '') {
+    calculator.displayValue === 0;
+    updateDisplayValue();
   }
-  return;
+  calculator.displayValue += '.';
+  displayValue.textContent += '.';
+};
+
+const deleteLastInput = () => {
+  if (calculator.displayValue.length > 0) {
+    calculator.displayValue = calculator.displayValue.slice(0, -1);
+    updateDisplayValue();
+  }
 };
 
 //Click Handler
 btnsContainer.addEventListener('click', function (e) {
   if (!e.target.matches('button') && !e.target.matches('img')) return;
-  // if (!e.target.classList.contains('btns-container__btn')) return;
-
-  // console.log(e.target);
-
-  if (e.target.classList.contains('operator')) {
-    // console.log('operator', e.target.textContent);
-    checkLastInputIsOperator();
-  }
 
   if (e.target.classList.contains('number')) {
-    // console.log('number', e.target.textContent);
-    // calculator.value += e.target.textContent;
-    // updateDisplayValue();
+    handleNumberInput(e.target.textContent);
   }
 
   if (e.target.classList.contains('dark-mode')) {
-    // console.log('color mode', e.target.textContent);
     changeColorMode();
   }
 
   if (e.target.classList.contains('equal')) {
-    checkLastInputIsOperator();
-    changeStringToArray();
-    console.log(calculator.array);
-    return;
+    calculator.calculationDone = true;
+    handleEqualInput();
   }
 
   if (e.target.classList.contains('decimal')) {
-    console.log('punto');
     handleDecimalInput();
-
-    checkLastInputIsNumber();
-    changeStringToArray();
-    console.log(calculator.array);
-    return;
   }
-  calculator.value += e.target.textContent;
-  updateDisplayValue();
-  // console.log('boton');
+
+  if (e.target.classList.contains('operator')) {
+    handleOperatorInput(e.target.textContent);
+  }
+
+  if (e.target.classList.contains('clear')) {
+    ClearAll();
+  }
+
+  if (e.target.classList.contains('back')) {
+    deleteLastInput();
+  }
 });
 
 // Keypress Handler
@@ -129,13 +146,26 @@ window.addEventListener('keydown', function (e) {
   }
 });
 
-const updateDisplayValue = () => {
-  displayValue.textContent = calculator.value;
-  // console.log(displayValue.textContent);
+const ClearAll = () => {
+  displayOperation.innerHTML = `&nbsp;`;
+  displayValue.textContent = 0;
+  calculator.displayValue = 0;
+  calculator.firstOperand = '';
+  calculator.hasFirstPart = false;
+  calculator.operator = '';
+  calculator.secondOperand = '';
+  calculator.calculationDone = false;
 };
 
-// const init = () => {
-//   updateDisplayValue();
-// };
+const updateDisplayValue = (target) => {
+  displayValue.textContent = Number(calculator.displayValue).toLocaleString(
+    'en-US'
+  );
+};
 
-// init();
+// Windows 10 Calculator Hover Effect
+const light = document.querySelector('.btns-container__light');
+document.addEventListener('mousemove', (e) => {
+  light.style.top = e.pageY - btnsContainer.offsetTop + 'px';
+  light.style.left = e.pageX - btnsContainer.offsetLeft + 'px';
+});

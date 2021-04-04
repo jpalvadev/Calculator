@@ -1,4 +1,5 @@
 .btns-container {
+  position: relative;
   // align-self: center;
   place-self: center;
 
@@ -11,9 +12,28 @@
   // height: 50vh;
   // height: 70vh;
   grid-gap: 0.2rem;
+  padding: 0.2rem;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(5, 1fr);
   // padding-block: 10rem;
   // margin-bottom: 1rem;
-  // overflow: hidden;
+  overflow: hidden;
+  // z-index: 4;
+  // display: none;
+  // visibility: hidden;
+
+  &__light {
+    background: radial-gradient(
+      ellipse at center,
+      rgba(#ffffff, 0.5) 0%,
+      rgba(#ffffff, 0) 50%
+    );
+
+    position: absolute;
+    width: 45vmin;
+    height: 45vmin;
+    z-index: -1;
+    border-radius: 50%;
+    transform: translate3d(-50%, -50%, 0);
+  }
 }
