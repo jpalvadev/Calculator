@@ -2,10 +2,18 @@ let textColor = getComputedStyle(document.body).getPropertyValue(
   '--color-text'
 );
 let bgColor = getComputedStyle(document.body).getPropertyValue('--color-back');
+let accentColorOne = getComputedStyle(document.body).getPropertyValue(
+  '--color-accent-one'
+);
+let accentColorTwo = getComputedStyle(document.body).getPropertyValue(
+  '--color-accent-two'
+);
 
 const btnsContainer = document.querySelector('.btns-container');
 const displayOperation = document.querySelector('.display__operation');
 const displayValue = document.querySelector('.display__value');
+const light = document.querySelector('.btns-container__light');
+light.style.top = `-1000px`;
 
 const calculator = {
   displayValue: 0,
@@ -18,8 +26,29 @@ const calculator = {
 
 const changeColorMode = () => {
   [textColor, bgColor] = [bgColor, textColor];
+  // console.log(accentColorOne);
+  [accentColorOne, accentColorTwo] = [accentColorTwo, accentColorOne];
+  // console.log(accentColorOne);
+
   document.documentElement.style.setProperty('--color-text', textColor);
   document.documentElement.style.setProperty('--color-back', bgColor);
+  document.documentElement.style.setProperty(
+    '--color-accent-one',
+    accentColorOne
+  );
+  console.log(`a${bgColor.trim()}a`);
+
+  light.style.background =
+    'radial-gradient( ellipse at center, rgba( ' +
+    textColor.trim() +
+    ', 0.5) 0%, rgba( ' +
+    textColor.trim() +
+    ', 0) 50%)';
+  console.log(
+    window.getComputedStyle(light, null).getPropertyValue('background')
+  );
+
+  // light.style.background = `red`;
 };
 
 handleOperation = () => {
@@ -108,6 +137,8 @@ const deleteLastInput = () => {
 btnsContainer.addEventListener('click', function (e) {
   if (!e.target.matches('button') && !e.target.matches('img')) return;
 
+  createRipple(e);
+
   if (e.target.classList.contains('number')) {
     handleNumberInput(e.target.textContent);
   }
@@ -164,8 +195,34 @@ const updateDisplayValue = (target) => {
 };
 
 // Windows 10 Calculator Hover Effect
-const light = document.querySelector('.btns-container__light');
-document.addEventListener('mousemove', (e) => {
-  light.style.top = e.pageY - btnsContainer.offsetTop + 'px';
-  light.style.left = e.pageX - btnsContainer.offsetLeft + 'px';
-});
+const detectScreenType = () => {
+  if (navigator.maxTouchPoints === 0) {
+    document.addEventListener('mousemove', (e) => {
+      light.style.top = e.pageY - btnsContainer.offsetTop + 'px';
+      light.style.left = e.pageX - btnsContainer.offsetLeft + 'px';
+    });
+  }
+};
+detectScreenType();
+
+// Copied - modify it
+function createRipple(event) {
+  const button = event.target;
+  const circle = document.createElement('span');
+  const diameter = Math.max(button.clientWidth, button.clientHeight);
+  const radius = diameter / 2;
+
+  circle.style.width = circle.style.height = `${diameter}px`;
+  circle.style.left = `${
+    event.pageX - btnsContainer.offsetLeft - button.offsetLeft - radius
+  }px`;
+  circle.style.top = `${
+    event.pageY - btnsContainer.offsetTop - button.offsetTop - radius
+  }px`;
+
+  circle.classList.add('ripple');
+  const ripple = button.getElementsByClassName('ripple')[0];
+  if (ripple) ripple.remove();
+
+  button.appendChild(circle);
+}

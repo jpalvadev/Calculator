@@ -13,14 +13,19 @@
   // visibility: hidden;
   background-color: var(--color-back);
 
-  &.teal {
-    color: var(--color-accent);
+  //ripple
+  position: relative;
+  overflow: hidden;
+  // transition: background 400ms;
+
+  &.accent {
+    color: var(--color-accent-one);
     // background-color: var(--color-accent-transparent);
     font-size: 10vmin;
   }
 
   &.equal {
-    background-color: var(--color-accent);
+    background-color: var(--color-accent-one);
     color: var(--color-back);
     // border-radius: 50px;
   }
@@ -31,4 +36,13 @@
     width: 50%;
     // height: auto;
   }
+}
+
+span.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple 500ms linear;
+  background-color: rgba(255, 255, 255, 0.35);
+  pointer-events: none;
 }

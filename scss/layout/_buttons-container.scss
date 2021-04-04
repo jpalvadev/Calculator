@@ -21,13 +21,27 @@
   // z-index: 4;
   // display: none;
   // visibility: hidden;
+  // width: 10rem;
 
   &__light {
+    // background: radial-gradient(
+    //   ellipse at center,
+    //   rgba(var(--color-text), 0.5) 0%,
+    //   rgba(var(--color-text), 0) 50%
+    // );
+
+    // @media not screen and (hover: none) {
+
     background: radial-gradient(
       ellipse at center,
-      rgba(#ffffff, 0.5) 0%,
-      rgba(#ffffff, 0) 50%
+      rgba(#666, 0.5) 0%,
+      rgba(#666, 0) 50%
     );
+    // background: radial-gradient(
+    //   ellipse at center,
+    //   rgba(#ffffff, 0.5) 0%,
+    //   rgba(#ffffff, 0) 50%
+    // );
 
     position: absolute;
     width: 45vmin;
@@ -35,5 +49,10 @@
     z-index: -1;
     border-radius: 50%;
     transform: translate3d(-50%, -50%, 0);
+
+    // @media (hover: none) and (pointer: coarse) {
+    //   display: none;
+    //   background: none;
+    // }
   }
 }
