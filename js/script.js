@@ -69,6 +69,8 @@ handleOperation = () => {
 };
 
 const handleEqualInput = () => {
+  console.log(calculator);
+
   if (!calculator.hasFirstPart) return;
 
   calculator.secondOperand = parseFloat(calculator.displayValue);
@@ -133,8 +135,7 @@ const deleteLastInput = () => {
   }
 };
 
-//Click Handler
-btnsContainer.addEventListener('click', function (e) {
+const handleButton = (e) => {
   if (!e.target.matches('button') && !e.target.matches('img')) return;
 
   createRipple(e);
@@ -157,6 +158,8 @@ btnsContainer.addEventListener('click', function (e) {
   }
 
   if (e.target.classList.contains('operator')) {
+    console.log(e.target.textContent);
+
     handleOperatorInput(e.target.textContent);
   }
 
@@ -167,15 +170,45 @@ btnsContainer.addEventListener('click', function (e) {
   if (e.target.classList.contains('back')) {
     deleteLastInput();
   }
-});
+};
 
-// Keypress Handler
-window.addEventListener('keydown', function (e) {
-  // e.preventDefault();
-  if (e.keyCode === 68) {
-    changeColorMode();
-  }
-});
+// btnsContainer.addEventListener('click', function (e) {
+//   handleButton(e);
+// });
+// btnsContainer.addEventListener('click', function (e) {
+// if (!e.target.matches('button') && !e.target.matches('img')) return;
+
+// createRipple(e);
+
+// if (e.target.classList.contains('number')) {
+//   handleNumberInput(e.target.textContent);
+// }
+
+// if (e.target.classList.contains('dark-mode')) {
+//   changeColorMode();
+// }
+
+// if (e.target.classList.contains('equal')) {
+//   calculator.calculationDone = true;
+//   handleEqualInput();
+// }
+
+// if (e.target.classList.contains('decimal')) {
+//   handleDecimalInput();
+// }
+
+// if (e.target.classList.contains('operator')) {
+//   handleOperatorInput(e.target.textContent);
+// }
+
+// if (e.target.classList.contains('clear')) {
+//   ClearAll();
+// }
+
+// if (e.target.classList.contains('back')) {
+//   deleteLastInput();
+// }
+// });
 
 const ClearAll = () => {
   displayOperation.innerHTML = `&nbsp;`;
@@ -205,7 +238,6 @@ const detectScreenType = () => {
 };
 detectScreenType();
 
-// Copied - modify it
 function createRipple(event) {
   const button = event.target;
   const circle = document.createElement('span');
@@ -223,6 +255,46 @@ function createRipple(event) {
   circle.classList.add('ripple');
   const ripple = button.getElementsByClassName('ripple')[0];
   if (ripple) ripple.remove();
-
   button.appendChild(circle);
 }
+
+//Click Handler
+btnsContainer.addEventListener('click', handleButton);
+
+// Keypress Handler
+window.addEventListener('keydown', function (e) {
+  const button = {};
+  button.target = document.querySelector(`button[data-key="${e.keyCode}"]`);
+  handleButton(button);
+});
+
+// Voice Handler
+window.SpeechRecognition =
+  window.SpeechRecognition || window.webkitSpeechRecognition;
+
+const recognition = new SpeechRecognition();
+recognition.interimResults = true;
+recognition.lang = 'en-US';
+
+let p = document.createElement('p');
+const words = document.querySelector('.words');
+words.appendChild(p);
+
+recognition.addEventListener('result', (e) => {
+  const transcript = Array.from(e.results)
+    .map((result) => result[0])
+    .map((result) => result.transcript)
+    .join('');
+
+  const poopScript = transcript.replace(/poop|poo|shit|dump/gi, '💩');
+  p.textContent = poopScript;
+
+  if (e.results[0].isFinal) {
+    p = document.createElement('p');
+    words.appendChild(p);
+  }
+});
+
+recognition.addEventListener('end', recognition.start);
+
+recognition.start();

@@ -14,6 +14,9 @@
     <title>Calculator</title>
   </head>
   <body>
+    <!--  DELETE next line -->
+    <div class="words" contenteditable></div>
+
     <!-- <div class="btns-container__light"></div> -->
     <div class="container">
       <div class="display">
@@ -26,32 +29,37 @@
           <img src="images/dl-mode.svg" alt="Dark light Mode icon" />
         </button> -->
 
-        <button class="btns-container__btn dark-mode">L-N</button>
+        <button data-key="68" class="btns-container__btn dark-mode">L-N</button>
         <!-- <button class="btns-container__btn clear accent">AC</button> -->
         <button class="btns-container__btn operator accent">^</button>
         <button class="btns-container__btn operator accent">√</button>
         <!-- <button class="btns-container__btn accent">÷</button> -->
-        <button class="btns-container__btn operator accent">/</button>
+        <!-- prettier-ignore -->
+        <button data-key="111" class="btns-container__btn operator accent">/</button>
 
-        <button class="btns-container__btn number">7</button>
-        <button class="btns-container__btn number">8</button>
-        <button class="btns-container__btn number">9</button>
-        <button class="btns-container__btn operator accent">x</button>
+        <button data-key="103" class="btns-container__btn number">7</button>
+        <button data-key="104" class="btns-container__btn number">8</button>
+        <button data-key="105" class="btns-container__btn number">9</button>
+        <!-- prettier-ignore -->
+        <button data-key="106" class="btns-container__btn operator accent">x</button>
 
-        <button class="btns-container__btn number">4</button>
-        <button class="btns-container__btn number">5</button>
-        <button class="btns-container__btn number">6</button>
-        <button class="btns-container__btn operator accent">-</button>
+        <button data-key="100" class="btns-container__btn number">4</button>
+        <button data-key="101" class="btns-container__btn number">5</button>
+        <button data-key="102" class="btns-container__btn number">6</button>
+        <!-- prettier-ignore -->
+        <button data-key="109" class="btns-container__btn operator accent">-</button>
 
-        <button class="btns-container__btn number">1</button>
-        <button class="btns-container__btn number">2</button>
-        <button class="btns-container__btn number">3</button>
-        <button class="btns-container__btn operator accent">+</button>
+        <button data-key="97" class="btns-container__btn number">1</button>
+        <button data-key="98" class="btns-container__btn number">2</button>
+        <button data-key="99" class="btns-container__btn number">3</button>
+        <!-- prettier-ignore -->
+        <button data-key="107" class="btns-container__btn operator accent">+</button>
 
-        <button class="btns-container__btn back">Bck</button>
-        <button class="btns-container__btn number">0</button>
-        <button class="btns-container__btn decimal">.</button>
-        <button class="btns-container__btn accent equal">=</button>
+        <button data-key="8" class="btns-container__btn back">Bck</button>
+        <button data-key="96" class="btns-container__btn number">0</button>
+        <button data-key="110" class="btns-container__btn decimal">.</button>
+        <!-- prettier-ignore -->
+        <button data-key="13" class="btns-container__btn accent equal">=</button>
         <!-- <button class="btns-container__btn operator accent equal">=</button> -->
         <div class="btns-container__light"></div>
       </div>
