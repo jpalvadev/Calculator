@@ -9,6 +9,11 @@ let accentColorTwo = getComputedStyle(document.body).getPropertyValue(
   '--color-accent-two'
 );
 
+// let pep = '22.3 + 23';
+const regex = new RegExp('([.0-9]+)|([^0-9]+)', 'g');
+// let pepee = pep.match(regex);
+// console.log(pepee);
+
 const btnsContainer = document.querySelector('.btns-container');
 const displayOperation = document.querySelector('.display__operation');
 const displayValue = document.querySelector('.display__value');
@@ -269,32 +274,67 @@ window.addEventListener('keydown', function (e) {
 });
 
 // Voice Handler
-window.SpeechRecognition =
-  window.SpeechRecognition || window.webkitSpeechRecognition;
+let voiceOperation = [];
+// let previousVoiceOperation = [];
+const voiceRecognition = () => {
+  window.SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
 
-const recognition = new SpeechRecognition();
-recognition.interimResults = true;
-recognition.lang = 'en-US';
+  const recognition = new SpeechRecognition();
+  recognition.interimResults = true;
+  recognition.lang = 'en-US';
 
-let p = document.createElement('p');
-const words = document.querySelector('.words');
-words.appendChild(p);
+  // let p = document.createElement('p');
+  // const words = document.querySelector('.words');
+  // words.appendChild(p);
 
-recognition.addEventListener('result', (e) => {
-  const transcript = Array.from(e.results)
-    .map((result) => result[0])
-    .map((result) => result.transcript)
-    .join('');
+  recognition.addEventListener('result', (e) => {
+    const transcript = Array.from(e.results)
+      .map((result) => result[0])
+      .map((result) => result.transcript)
+      .join('');
 
-  const poopScript = transcript.replace(/poop|poo|shit|dump/gi, '💩');
-  p.textContent = poopScript;
+    // const poopScript = transcript.replace(/poop|poo|shit|dump/gi, '💩');
+    // p.textContent = transcript;
 
-  if (e.results[0].isFinal) {
-    p = document.createElement('p');
-    words.appendChild(p);
-  }
-});
+    if (e.results[0].isFinal) {
+      voiceOperation = transcript.match(regex);
+      calculator.hasFirstPart = true;
+      calculator.firstOperand = parseFloat(voiceOperation[0]);
+      calculator.operator = voiceOperation[1]?.trim().replace('*', 'x');
+      calculator.displayValue = voiceOperation[2];
+      handleEqualInput();
+    }
 
-recognition.addEventListener('end', recognition.start);
+    // p = document.createElement('p');
+    // words.appendChild(p);
 
-recognition.start();
+    // console.log(transcript);
+
+    // console.log(pepee);
+
+    //   secondOperand: '',
+    //   calculationDone: false,
+    // };
+  });
+
+  recognition.addEventListener('end', function () {
+    // if ()
+    // console.log(voiceOperation);
+    // calculator.hasFirstPart = true;
+    // calculator.firstOperand = parseFloat(voiceOperation[0]);
+    // calculator.operator = voiceOperation[1]?.trim().replace('*', 'x');
+    // calculator.displayValue = voiceOperation[2];
+
+    // handleEqualInput();
+
+    recognition.start();
+  });
+
+  recognition.start();
+  // recognition.addEventListener('end', function (e) {
+  //   recognition.start();
+  // });
+};
+
+voiceRecognition();
