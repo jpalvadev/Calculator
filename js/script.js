@@ -275,7 +275,17 @@ window.addEventListener('keydown', function (e) {
 
 // Voice Handler
 let voiceOperation = [];
-// let previousVoiceOperation = [];
+let previousVoiceOperation = [];
+
+const msg = new SpeechSynthesisUtterance();
+let voice = [];
+voice = window.speechSynthesis.getVoices();
+console.log(voice);
+
+console.log(speechSynthesis);
+
+// console.log(msg.voice);
+
 const voiceRecognition = () => {
   window.SpeechRecognition =
     window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -298,12 +308,25 @@ const voiceRecognition = () => {
     // p.textContent = transcript;
 
     if (e.results[0].isFinal) {
+      console.log('la');
       voiceOperation = transcript.match(regex);
+      console.log(voiceOperation);
+
+      if (voiceOperation.length !== 3) {
+        console.log('y?');
+        return;
+        console.log('y no?');
+      }
       calculator.hasFirstPart = true;
       calculator.firstOperand = parseFloat(voiceOperation[0]);
       calculator.operator = voiceOperation[1]?.trim().replace('*', 'x');
       calculator.displayValue = voiceOperation[2];
       handleEqualInput();
+      msg.text = calculator.displayValue;
+      console.log(speechSynthesis);
+      msg.lang = 'en-US';
+
+      speechSynthesis.speak(msg);
     }
 
     // p = document.createElement('p');
@@ -319,15 +342,14 @@ const voiceRecognition = () => {
   });
 
   recognition.addEventListener('end', function () {
-    // if ()
-    // console.log(voiceOperation);
+    console.log(voiceOperation);
     // calculator.hasFirstPart = true;
     // calculator.firstOperand = parseFloat(voiceOperation[0]);
     // calculator.operator = voiceOperation[1]?.trim().replace('*', 'x');
     // calculator.displayValue = voiceOperation[2];
 
     // handleEqualInput();
-
+    console.log('sigue?');
     recognition.start();
   });
 
