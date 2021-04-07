@@ -1,8 +1,8 @@
 :root {
-  --color-text: #ffffff;
-  --color-back: #252525;
-  --color-accent-one: #4fe4c4;
-  --color-accent-two: #ff6f6f;
+  --color-text: #252525;
+  --color-back: #ffffff;
+  --color-accent-one: #ff6f6f;
+  --color-accent-two: #4fe4c4;
 }
 
 @keyframes ripple {
@@ -43,11 +43,6 @@ button {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.words {
-  color: white;
-  font-size: 10rem;
-}
-
 .btns-container__btn {
   height: 20vmin;
   width: 20vmin;
@@ -84,18 +79,99 @@ span.ripple {
   pointer-events: none;
 }
 
+.checkbox {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  grid-gap: 6vmin;
+}
+
+.checkbox__dark {
+  display: flex;
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  justify-self: end;
+}
+
+.checkbox__switch input {
+  display: none;
+}
+
+.checkbox label {
+  margin-top: 1.4vmin;
+  margin-inline: 1rem;
+}
+
+.checkbox__text {
+  font-size: 2rem;
+  font-size: clamp(2rem, 6vmin, 3.5rem);
+  color: var(--color-text);
+}
+
+.checkbox__voice {
+  display: flex;
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+.checkbox__switch {
+  display: inline-block;
+  width: 4rem;
+  /*=w*/
+  height: 2rem;
+  /*=h*/
+  position: relative;
+}
+
+.checkbox__slider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 3rem;
+  box-shadow: 0 0 0 2px var(--color-text), 0 0 4px var(--color-text);
+  cursor: pointer;
+  border: 4px solid transparent;
+  overflow: hidden;
+  transition: 0.4s;
+}
+
+.checkbox__slider:before {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-text);
+  border-radius: 3rem;
+  transform: translateX(-2rem);
+  /*translateX(-(w-h))*/
+  transition: 0.4s;
+}
+
+.checkbox input:checked + .checkbox__slider:before {
+  transform: translateX(2rem);
+  /*translateX(w-h)*/
+  background-color: var(--color-accent-one);
+}
+
+.checkbox input:checked + .checkbox__slider {
+  box-shadow: 0 0 0 2px var(--color-accent-one), 0 0 8px var(--color-accent-one);
+}
+
 .container {
   display: grid;
   grid-template-columns: 1fr min-content 1fr;
-  grid-template-rows: 25vh 65vh;
-  margin-top: 5vh;
+  grid-template-rows: 5vh 25vh 65vh;
+  margin-top: 2.5vh;
 }
 
 .btns-container {
   position: relative;
   place-self: center;
   grid-column: 2 / 3;
-  grid-row: 2 / 3;
+  grid-row: 3 / 4;
   display: grid;
   grid-gap: 0.2rem;
   padding: 0.2rem;
@@ -116,7 +192,7 @@ span.ripple {
 
 .display {
   grid-column: 2 / 3;
-  grid-row: 1 / 2;
+  grid-row: 2 / 3;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;

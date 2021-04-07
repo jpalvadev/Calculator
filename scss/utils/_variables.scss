@@ -1,14 +1,20 @@
 :root {
   //White mode
-  // --color-text: #252525;
-  // --color-back: #ffffff;
+  --color-text: #252525;
+  --color-back: #ffffff;
 
   // Black mode
-  --color-text: #ffffff;
-  --color-back: #252525;
+  // --color-text: #ffffff;
+  // --color-back: #252525;
 
   // --color-accent: #01c498;
-  --color-accent-one: #4fe4c4;
-  --color-accent-two: #ff6f6f;
+
+  // If white mode
+  --color-accent-one: #ff6f6f;
+  --color-accent-two: #4fe4c4;
+
+  // IF black mode
+  // --color-accent-one: #4fe4c4;
+  // --color-accent-two: #ff6f6f;
   // --color-accent-transparent: rgba(79, 228, 196, 0.15);
 }
