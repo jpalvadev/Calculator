@@ -1,0 +1,18 @@
+.side-panel {
+  grid-column: 2 / 3;
+  grid-row: 2 / 4;
+
+  &__tabs {
+    grid-row: 2 / 3;
+  }
+
+  &__history-div {
+    grid-row: 3 / 4;
+  }
+  // display: none;
+
+  // display: flex;
+  // flex-direction: row;
+  // flex-wrap: wrap;
+  max-width: 100%;
+}
