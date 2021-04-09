@@ -1,5 +1,5 @@
 .container {
-  // height: 100%;
+  // height: 100vh;
   // display: flex;
   // margin: 0 auto;
   // border: 1px solid red;
@@ -15,7 +15,8 @@
   // grid-template-columns: 1fr min-content 1fr;
   grid-template-columns: 1fr;
 
-  grid-gap: 2vmin;
+  grid-column-gap: clamp(3rem, 6vmin, 6rem);
+  grid-row-gap: clamp(1.25rem, 3vmin, 4.5rem);
   margin: 0 auto;
 
   // place-self: center;
