@@ -21,7 +21,7 @@
   // &__tabs {
   //   grid-row: 2 / 3;
   // }
-  input[type='radio'] {
+  input[type="radio"] {
     display: none;
 
     &:checked + label {
@@ -134,6 +134,31 @@
     // smooth bar animation
     // animation: roundtime calc(var(--timer) * 1s) linear forwards;
     // transform-origin: left center;
+  }
+
+  &__high-scores {
+    // background-color: aqua;
+    width: 100%;
+    // margin: 0 auto;
+  }
+
+  &__top-score {
+    display: flex;
+    font-size: clamp(1rem, 4vmin, 2rem);
+    color: var(--color-text);
+
+    p {
+      width: 50%;
+      // border: 1px solid rgba(124, 124, 124, 0.1);
+      padding-inline: 1rem;
+    }
+  }
+
+  &__player-name {
+    text-align: right;
+  }
+  &__player-score {
+    text-align: left;
   }
 
   &__btn {
