@@ -21,13 +21,12 @@
     <div class="container">
       <div class="checkbox">
         <div class="checkbox__dark">
-          <p class="checkbox__text checkbox__text--1">Dark</p>
-
           <label class="checkbox__switch">
             <!-- <p class="checkbox__text">Dark</p> -->
             <input class="checkbox__input dark" type="checkbox" />
             <span class="checkbox__slider"></span>
           </label>
+          <p class="checkbox__text checkbox__text--1">Dark</p>
         </div>
         <div class="checkbox__voice voice">
           <label class="checkbox__switch">
@@ -102,24 +101,26 @@
           name="tabs"
         />
         <label for="game-tab">Game</label>
-      </div>
+        <div class="side-panel__history-div visible">
+          <p class="side-panel__history-text">&nbsp;</p>
+          <p class="side-panel__history-text">&nbsp;</p>
+          <p class="side-panel__history-text">&nbsp;</p>
+          <p class="side-panel__history-text">&nbsp;</p>
+          <p class="side-panel__history-text">&nbsp;</p>
+          <p class="side-panel__history-text">&nbsp;</p>
+          <p class="side-panel__history-text">&nbsp;</p>
+          <p class="side-panel__history-text">&nbsp;</p>
+          <!-- <p class="side-panel__history-text">&nbsp;</p>
+          <p class="side-panel__history-text">&nbsp;</p> -->
+        </div>
+        <div class="side-panel__game-div">
+          <div class="side-panel__bar"></div>
+          <p class="side-panel__game-text">&nbsp;</p>
+          <p class="side-panel__game-text score">Score: 0</p>
 
-      <div class="side-panel__history-div visible">
-        <p class="side-panel__history-text">&nbsp;</p>
-        <p class="side-panel__history-text">&nbsp;</p>
-        <p class="side-panel__history-text">&nbsp;</p>
-        <p class="side-panel__history-text">&nbsp;</p>
-        <p class="side-panel__history-text">&nbsp;</p>
-        <p class="side-panel__history-text">&nbsp;</p>
-        <p class="side-panel__history-text">&nbsp;</p>
-        <p class="side-panel__history-text">&nbsp;</p>
-        <p class="side-panel__history-text">&nbsp;</p>
-        <p class="side-panel__history-text">&nbsp;</p>
-      </div>
-
-      <div class="side-panel__game-div">
-        <p class="side-panel__game-text">3 + 1 = 4</p>
-        <p class="side-panel__game-text">344 + 23421 = 2342344</p>
+          <button class="side-panel__btn">Start Game!</button>
+          <!-- <button class="mas">Start Game!</button> -->
+        </div>
       </div>
     </div>
   </body>

@@ -22,6 +22,100 @@ const historyDiv = document.querySelector('.side-panel__history-div');
 const gameDiv = document.querySelector('.side-panel__game-div');
 // const tabs = document.querySelectorAll('.side-panel__input');
 console.log(tabs);
+const startGameBtn = document.querySelector('.side-panel__btn');
+const gameBar = document.querySelector('.side-panel__bar');
+const gameText = document.querySelector('.side-panel__game-text');
+const scoreText = document.querySelector('.score');
+let score = 0;
+// let gameTimer = 60;
+let gameStarted = false;
+
+let sumUpperLimit = 100;
+let timesUpperLimit = 10;
+
+// gameBar.style.visibility = 'hidden';
+
+const getRandomOperation = () => {
+  const operators = ['+', '-', 'x', '/'];
+  const operator = Math.floor(Math.random() * operators.length);
+  console.log(operator);
+  let upperLimit = 0;
+  if (operator > 1) upperLimit = timesUpperLimit;
+  else upperLimit = sumUpperLimit;
+  calculator.firstOperand = Math.ceil(Math.random() * upperLimit);
+  calculator.secondOperand = Math.ceil(Math.random() * upperLimit);
+  if (operator === 1 && calculator.firstOperand < calculator.secondOperand) {
+    [calculator.firstOperand, calculator.secondOperand] = [
+      calculator.secondOperand,
+      calculator.firstOperand,
+    ];
+  }
+  calculator.operator = operators[operator];
+  console.log(calculator);
+  calculator.gameResult = handleOperation();
+  console.log(calculator);
+  gameText.textContent = `${calculator.firstOperand} ${calculator.operator} ${calculator.secondOperand} = ?`;
+};
+// gameBar.style.width = `${100}%`;
+// gameBar.style.width = `${5 * 5}%`;
+let cssProperties = getComputedStyle(document.documentElement);
+let gameTimer = cssProperties.getPropertyValue('--timer');
+document.documentElement.style.setProperty('--timer', gameTimer);
+const startGame = () => {
+  gameStarted = true;
+  scoreText.style.visibility = 'visible';
+
+  ClearAll();
+  getRandomOperation();
+
+  sumUpperLimit += 20;
+  timesUpperLimit += 2;
+
+  startGameBtn.style.visibility = 'hidden';
+  gameBar.style.visibility = 'visible';
+
+  // document.querySelector('.mas').addEventListener('click', function (e) {
+  //   gameTimer++;
+  //   console.log('y????');
+
+  //   document.documentElement.style.setProperty('--timer', gameTimer);
+  // });
+  gameTimer -= 1;
+  // gameBar.style.width = `${gameTimer * 5}%`;
+  gameBar.style.width = `${gameTimer * 5}%`;
+  console.log('ja');
+
+  const interval = setInterval(() => {
+    gameTimer -= 1;
+    gameBar.style.width = `${gameTimer * 5}%`;
+    // gameBar.style.width = `${5 * gameTimer}%`;
+    console.log('je');
+    console.log(gameTimer);
+
+    if (gameTimer <= -1) {
+      ClearAll();
+      startGameBtn.style.visibility = 'visible';
+      scoreText.style.visibility = 'hidden';
+      console.log('noooo!');
+      // gameOver();
+      gameTimer = 20;
+      gameStarted = false;
+      sumUpperLimit = 100;
+      timesUpperLimit = 20;
+      score = 0;
+      scoreText.textContent = `Score: 0`;
+      gameBar.style.width = `100%`;
+      gameBar.style.visibility = 'hidden';
+      gameText.textContent = '';
+      // gameBar.style.animation = ``;
+      clearInterval(interval);
+    }
+  }, 1000);
+};
+
+startGameBtn.addEventListener('click', () => {
+  startGame();
+});
 
 // Tabs
 tabs.addEventListener('click', function (e) {
@@ -85,6 +179,7 @@ const calculator = {
   operator: '',
   secondOperand: '',
   calculationDone: false,
+  gameResult: 0,
 };
 
 const changeColorMode = () => {
@@ -123,6 +218,15 @@ handleOperation = () => {
     case 'x':
       return calculator.firstOperand * calculator.secondOperand;
     case '/':
+      if (gameStarted) {
+        console.log('divid');
+
+        let temp = calculator.firstOperand * calculator.secondOperand;
+        let result = calculator.secondOperand;
+        calculator.secondOperand = calculator.firstOperand;
+        calculator.firstOperand = temp;
+        return result;
+      }
       return calculator.firstOperand / calculator.secondOperand;
     case '^':
       return calculator.firstOperand ** calculator.secondOperand;
@@ -142,6 +246,18 @@ const updateHistory = (operation) => {
 
 const handleEqualInput = () => {
   console.log(calculator);
+
+  if (gameStarted) {
+    console.log(Number(calculator.displayValue), calculator.gameResult);
+    if (Number(calculator.displayValue) === calculator.gameResult) {
+      gameTimer += 5;
+      score++;
+      scoreText.textContent = `Score: ${score}`;
+    } else gameTimer -= 5;
+    if (gameTimer > 20) gameTimer = 20;
+    getRandomOperation();
+    // if (calculator.displayValue)
+  }
 
   if (!calculator.hasFirstPart) return;
 
@@ -216,14 +332,19 @@ const handleButton = (e) => {
     handleNumberInput(e.target.textContent);
   }
 
-  if (e.target.classList.contains('dark-mode')) {
-    changeColorMode();
+  // if (e.target.classList.contains('dark-mode')) {
+  //   changeColorMode();
+  // }
+  if (e.target.classList.contains('back')) {
+    deleteLastInput();
   }
 
   if (e.target.classList.contains('equal')) {
     calculator.calculationDone = true;
     handleEqualInput();
   }
+
+  if (gameStarted) return;
 
   if (e.target.classList.contains('decimal')) {
     handleDecimalInput();
@@ -237,10 +358,6 @@ const handleButton = (e) => {
 
   if (e.target.classList.contains('clear')) {
     ClearAll();
-  }
-
-  if (e.target.classList.contains('back')) {
-    deleteLastInput();
   }
 };
 
