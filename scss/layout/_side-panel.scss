@@ -9,6 +9,7 @@
   @media (orientation: landscape) {
     display: grid;
     grid-template-rows: repeat(10, 1fr);
+    grid-template-columns: 1fr 1fr;
     // place-items: center;
     // display: flex;
     // flex-direction: row;
@@ -21,7 +22,7 @@
   // &__tabs {
   //   grid-row: 2 / 3;
   // }
-  input[type="radio"] {
+  input[type='radio'] {
     display: none;
 
     &:checked + label {
@@ -37,9 +38,13 @@
     // align-self: stretch;
     // place-self: center;
     // place-items: center;
+
     display: flex;
     justify-content: center;
     align-items: center;
+
+    // flex: 1;
+    // width: 50%;
 
     grid-row: 9 / 11;
     font-size: clamp(2rem, 6vmin, 2.5rem);
@@ -109,24 +114,37 @@
   }
 
   &__game-text {
-    font-size: clamp(2rem, 5vmin, 6rem);
+    font-size: clamp(2rem, 5vmin, 4rem);
     font-weight: 800;
     text-align: right;
     color: var(--color-text);
     text-align: center;
 
+    &.guess {
+      // display: none;
+      text-align: center;
+    }
+
     &.score {
-      visibility: hidden;
+      display: none;
+      // text-align: right;
+      // visibility: hidden;
+    }
+
+    &.top-five {
+      font-size: clamp(1rem, 4vmin, 2.5rem);
+      text-align: left;
     }
   }
 
   &__bar {
-    height: 5vmin;
+    height: 2vmin;
     width: 100%;
 
     // display: block;
     background: var(--color-accent-one);
-    visibility: hidden;
+    // visibility: hidden;
+    display: none;
     transition: width 1s linear;
     // bar animation with steps
     // animation: roundtime calc(var(--timer) * 1s) steps(var(--timer))
@@ -155,10 +173,15 @@
   }
 
   &__player-name {
-    text-align: right;
+    // text-align: right;
+    text-align: center;
+    align-self: center;
   }
   &__player-score {
-    text-align: left;
+    // text-align: left;
+    // text-align: center;
+    text-align: right;
+    align-self: center;
   }
 
   &__btn {
@@ -167,6 +190,7 @@
     margin: 0 auto;
     font-size: clamp(2rem, 6vmin, 2.5rem);
     padding: 1vmin 1.5vmin;
+    // display: none;
   }
 
   // display: none;
