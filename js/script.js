@@ -19,24 +19,15 @@ let highScores = [
   { name: 'Tino' },
   { name: 'Juan' },
   { name: 'Andrea' },
-  { name: 'Marmolina' },
   { name: 'Vito' },
   { name: 'Pepe' },
   { name: 'Cristina' },
   { name: 'Shepard' },
   { name: 'Doomguy' },
-  { name: 'Negrita' },
   { name: 'Geralt' },
   { name: 'Ezio' },
-  { name: 'Garrus' },
-  { name: 'Mario' },
-  { name: 'Carpecho' },
-  { name: 'Circuito' },
-  { name: 'MacGyver' },
   { name: 'TARS' },
-  { name: 'Wall-E' },
   { name: 'ALF' },
-  { name: 'Kenny' },
 ];
 
 const calculator = {
@@ -378,6 +369,12 @@ const changeColorMode = () => {
 
 const detectScreenType = () => {
   if (navigator.maxTouchPoints === 0) {
+    // document.addEventListener('touchstart', (e) => {
+    //   e.preventDefault();
+    // });
+    // document.addEventListener('touchend', (e) => {
+    //   e.preventDefault();
+    // });
     document.addEventListener('mousemove', (e) => {
       light.style.top = e.pageY - btnsContainer.offsetTop + 'px';
       light.style.left = e.pageX - btnsContainer.offsetLeft + 'px';
@@ -486,7 +483,7 @@ const init = () => {
   changeColorMode();
   if (localStorage.getItem('highscores') === null) {
     highScores.forEach(
-      (player) => (player.score = Math.floor(Math.random() * 10))
+      (player) => (player.score = Math.floor(Math.random() * 20))
     );
     localStorage.setItem('highscores', JSON.stringify(highScores));
   } else highScores = JSON.parse(localStorage.getItem('highscores'));
