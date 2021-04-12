@@ -11,18 +11,13 @@
       rel="stylesheet"
     />
     <script src="js/script.js" defer></script>
-    <title>Calculator</title>
+    <title>Talkulator</title>
   </head>
   <body>
-    <!--  DELETE next line -->
-    <!-- <div class="words" contenteditable></div> -->
-
-    <!-- <div class="btns-container__light"></div> -->
     <div class="container">
       <div class="checkbox">
         <div class="checkbox__dark">
           <label class="checkbox__switch">
-            <!-- <p class="checkbox__text">Dark</p> -->
             <input class="checkbox__input dark" type="checkbox" />
             <span class="checkbox__slider"></span>
           </label>
@@ -34,7 +29,6 @@
             <span class="checkbox__slider"></span>
           </label>
           <p class="checkbox__text checkbox__text--2">Voice</p>
-          <!-- <p class="checkbox__text">Voice</p> -->
         </div>
       </div>
 
@@ -43,47 +37,84 @@
         <p class="display__value">0</p>
       </div>
       <div class="btns-container">
-        <!-- <button class="btns-container__btn dark-mode accent" data-key="68">
-          Col
-          <img src="images/dl-mode.svg" alt="Dark light Mode icon" />
-        </button> -->
-
-        <!-- <button data-key="68" class="btns-container__btn dark-mode">L-N</button> -->
-        <button class="btns-container__btn clear accent">AC</button>
+        <!-- <button class="btns-container__btn clear accent">AC</button> -->
+        <button class="btns-container__btn clear accent">
+          <svg
+            class="clear"
+            height="512"
+            viewBox="0 0 512 512"
+            width="512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g>
+              <path
+                class="clear"
+                d="m424 64h-88v-16c0-26.467-21.533-48-48-48h-64c-26.467 0-48 21.533-48 48v16h-88c-22.056 0-40 17.944-40 40v56c0 8.836 7.164 16 16 16h8.744l13.823 290.283c1.221 25.636 22.281 45.717 47.945 45.717h242.976c25.665 0 46.725-20.081 47.945-45.717l13.823-290.283h8.744c8.836 0 16-7.164 16-16v-56c0-22.056-17.944-40-40-40zm-216-16c0-8.822 7.178-16 16-16h64c8.822 0 16 7.178 16 16v16h-96zm-128 56c0-4.411 3.589-8 8-8h336c4.411 0 8 3.589 8 8v40c-4.931 0-331.567 0-352 0zm313.469 360.761c-.407 8.545-7.427 15.239-15.981 15.239h-242.976c-8.555 0-15.575-6.694-15.981-15.239l-13.751-288.761h302.44z"
+              />
+              <path
+                class="clear"
+                d="m256 448c8.836 0 16-7.164 16-16v-208c0-8.836-7.164-16-16-16s-16 7.164-16 16v208c0 8.836 7.163 16 16 16z"
+              />
+              <path
+                class="clear"
+                d="m336 448c8.836 0 16-7.164 16-16v-208c0-8.836-7.164-16-16-16s-16 7.164-16 16v208c0 8.836 7.163 16 16 16z"
+              />
+              <path
+                class="clear"
+                d="m176 448c8.836 0 16-7.164 16-16v-208c0-8.836-7.164-16-16-16s-16 7.164-16 16v208c0 8.836 7.163 16 16 16z"
+              />
+            </g>
+          </svg>
+        </button>
         <button class="btns-container__btn operator accent">^</button>
         <button class="btns-container__btn operator accent">√</button>
-        <!-- <button class="btns-container__btn accent">÷</button> -->
         <!-- prettier-ignore -->
-        <button data-key="111" class="btns-container__btn operator accent">/</button>
-
-        <button data-key="103" class="btns-container__btn number">7</button>
-        <button data-key="104" class="btns-container__btn number">8</button>
-        <button data-key="105" class="btns-container__btn number">9</button>
+        <button data-key="/" class="btns-container__btn operator accent">/</button>
+        <button data-key="7" class="btns-container__btn number">7</button>
+        <button data-key="8" class="btns-container__btn number">8</button>
+        <button data-key="9" class="btns-container__btn number">9</button>
         <!-- prettier-ignore -->
-        <button data-key="106" class="btns-container__btn operator accent">x</button>
-
-        <button data-key="100" class="btns-container__btn number">4</button>
-        <button data-key="101" class="btns-container__btn number">5</button>
-        <button data-key="102" class="btns-container__btn number">6</button>
+        <button data-key="*" class="btns-container__btn operator accent">x</button>
+        <button data-key="4" class="btns-container__btn number">4</button>
+        <button data-key="5" class="btns-container__btn number">5</button>
+        <button data-key="6" class="btns-container__btn number">6</button>
         <!-- prettier-ignore -->
-        <button data-key="109" class="btns-container__btn operator accent">-</button>
-
-        <button data-key="97" class="btns-container__btn number">1</button>
-        <button data-key="98" class="btns-container__btn number">2</button>
-        <button data-key="99" class="btns-container__btn number">3</button>
+        <button data-key="-" class="btns-container__btn operator accent">-</button>
+        <button data-key="1" class="btns-container__btn number">1</button>
+        <button data-key="2" class="btns-container__btn number">2</button>
+        <button data-key="3" class="btns-container__btn number">3</button>
         <!-- prettier-ignore -->
-        <button data-key="107" class="btns-container__btn operator accent">+</button>
-
-        <button data-key="8" class="btns-container__btn back">Bck</button>
-        <button data-key="96" class="btns-container__btn number">0</button>
-        <button data-key="110" class="btns-container__btn decimal">.</button>
+        <button data-key="+" class="btns-container__btn operator accent">+</button>
         <!-- prettier-ignore -->
-        <button data-key="13" class="btns-container__btn accent equal">=</button>
-        <!-- <button class="btns-container__btn operator accent equal">=</button> -->
+        <!-- <button data-key="Backspace" class="btns-container__btn back">Bck</button> -->
+        <button data-key="Backspace" class="btns-container__btn back">
+          <?xml version="1.0" encoding="iso-8859-1"?>
+          <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+          <svg
+            class="clear"
+            height="512"
+            viewBox="0 0 512 512"
+            width="512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g>
+              <path
+                d="M490.667,64H133.077c-7.196,0-13.906,3.627-17.848,9.647L3.485,244.314c-4.647,7.098-4.647,16.274,0,23.372
+				l111.744,170.667c3.942,6.02,10.652,9.647,17.848,9.647h357.589c11.782,0,21.333-9.551,21.333-21.333V85.333
+				C512,73.551,502.449,64,490.667,64z M469.333,405.333H144.609L46.833,256l97.776-149.333h324.725V405.333z M198.246,356.418c8.331,8.331,21.839,8.331,30.17,0l70.248-70.248l70.248,70.248c8.331,8.331,21.839,8.331,30.17,0
+				s8.331-21.839,0-30.17L328.834,256l70.248-70.248c8.331-8.331,8.331-21.839,0-30.17s-21.839-8.331-30.17,0l-70.248,70.248
+				l-70.248-70.248c-8.331-8.331-21.839-8.331-30.17,0c-8.331,8.331-8.331,21.839,0,30.17L268.495,256l-70.248,70.248
+				C189.915,334.58,189.915,348.087,198.246,356.418z"
+              />
+            </g>
+          </svg>
+        </button>
+        <button data-key="0" class="btns-container__btn number">0</button>
+        <button data-key="." class="btns-container__btn decimal">.</button>
+        <!-- prettier-ignore -->
+        <button data-key="Enter" class="btns-container__btn accent equal">=</button>
         <div class="btns-container__light"></div>
       </div>
-
-      <!-- <div class="side-panel"> -->
 
       <div class="side-panel">
         <input
@@ -110,46 +141,13 @@
           <p class="side-panel__history-text">&nbsp;</p>
           <p class="side-panel__history-text">&nbsp;</p>
           <p class="side-panel__history-text">&nbsp;</p>
-          <!-- <p class="side-panel__history-text">&nbsp;</p>
-          <p class="side-panel__history-text">&nbsp;</p> -->
         </div>
         <div class="side-panel__game-div">
           <div class="side-panel__bar"></div>
           <p class="side-panel__game-text guess">&nbsp;</p>
           <p class="side-panel__game-text score">Score: 0</p>
-
-          <!-- <p class="side-panel__game-text top-five">Top 5</p> -->
-
-          <div class="side-panel__high-scores">
-            <!-- <div class="side-panel__top-score">
-              <p class="side-panel__game-text top-five">T</p>
-              <p class="side-panel__player-name">Andrea</p>
-              <p class="side-panel__player-score">10</p>
-            </div>
-            <div class="side-panel__top-score">
-              <p class="side-panel__game-text top-five">o</p>
-              <p class="side-panel__player-name">Juan</p>
-              <p class="side-panel__player-score">8</p>
-            </div>
-            <div class="side-panel__top-score">
-              <p class="side-panel__game-text top-five">p</p>
-              <p class="side-panel__player-name">Vito</p>
-              <p class="side-panel__player-score">6</p>
-            </div>
-            <div class="side-panel__top-score">
-              <p class="side-panel__game-text top-five">&nbsp;</p>
-              <p class="side-panel__player-name">Pepe</p>
-              <p class="side-panel__player-score">4</p>
-            </div>
-            <div class="side-panel__top-score">
-              <p class="side-panel__game-text top-five">5</p>
-              <p class="side-panel__player-name">Tino</p>
-              <p class="side-panel__player-score">2</p>
-            </div> -->
-          </div>
-
+          <div class="side-panel__high-scores"></div>
           <button class="side-panel__btn">Start!</button>
-          <!-- <button class="mas">Start Game!</button> -->
         </div>
       </div>
     </div>
